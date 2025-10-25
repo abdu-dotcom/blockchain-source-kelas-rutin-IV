@@ -1,0 +1,98 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "grow",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "myPlant",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "enum LearnStruct.GrowthStage",
+						"name": "stage",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "waterLevel",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAlive",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "water",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"learn/LearnStruct.sol": "LearnStruct"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"learn/LearnStruct.sol": {
+			"keccak256": "0x43c92093ebe08e7b969791cacbbc462dfb2112fb306ec4dc98eda46a2a1cbb38",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a5c3024adcc7f7b571cecaccbd5a55b6b2bb76f8d8d01a4dd75eedb1924d928b",
+				"dweb:/ipfs/QmfHcBhrc31qwrowYFUnvEKGH9nw6C2M1b9c9ranLxDYtr"
+			]
+		}
+	},
+	"version": 1
+}
