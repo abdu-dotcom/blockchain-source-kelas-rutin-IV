@@ -11,14 +11,78 @@
 				"type": "constructor"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "balance",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "_plantId",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "addPlant",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "number",
+						"type": "uint256"
+					}
+				],
+				"name": "checkEven",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "complexCheck",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "internalCheck",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -37,21 +101,14 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "ownerActionCount",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "ownerFunction",
+				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -59,36 +116,17 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "plantOwner",
-				"outputs": [
-					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "waterLevel",
+				"name": "userBalance",
 				"outputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "uint256",
 						"name": "",
-						"type": "uint8"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -98,11 +136,11 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_plantId",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "waterPlant",
+				"name": "withdraw",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -121,7 +159,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Learn/Sesi-01/LearnModifier.sol": "LearnModifier"
+			"Learn/Sesi-01/LearnErrorHandling.sol": "LearnErrorHandling"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -135,12 +173,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"Learn/Sesi-01/LearnModifier.sol": {
-			"keccak256": "0x78d9a5d5bd1cebe62bc7b35fb2ffc3a7e48800434855dc339881f67dc5576cd0",
+		"Learn/Sesi-01/LearnErrorHandling.sol": {
+			"keccak256": "0x91af8b53da4e2506524a01c320959b0967b4e9d5cf234ab6bf827f2d4c6bdf80",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ec1387f479ca9119526f30737b467da7ae62760bfb5c191f27d206327c67decc",
-				"dweb:/ipfs/QmRLGrDHVgdvBoe8czKn1J4dafLceDfQrs35rnV4o8Bckg"
+				"bzz-raw://c151df67358976573e0115b3172e17a0e44f11c828c2c3ede2f48ededef9cf68",
+				"dweb:/ipfs/Qmbyy5ZJfTb91MuUw8xbPjPL1BzA8miFUp98LJhbnTAAeR"
 			]
 		}
 	},

@@ -77,7 +77,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"learn/LearnArray.sol": "LearnArray"
+			"Learn/Sesi-01/LearnArray.sol": "LearnArray"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -91,7 +91,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"learn/LearnArray.sol": {
+		"Learn/Sesi-01/LearnArray.sol": {
 			"keccak256": "0xcdf096ec1b37d78f75ad6c052bade24c7dd352df83d45ed11a3618965823a206",
 			"license": "MIT",
 			"urls": [

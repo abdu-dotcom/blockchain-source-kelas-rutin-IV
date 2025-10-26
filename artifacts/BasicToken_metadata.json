@@ -1,0 +1,195 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_initialSupply",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "balances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Token paling sederhana - hanya transfer",
+			"events": {
+				"Transfer(address,address,uint256)": {
+					"details": "Event ketika transfer terjadi"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"balanceOf(address)": {
+					"details": "Get balance of address",
+					"params": {
+						"_owner": "Address to check"
+					},
+					"returns": {
+						"balance": "Token balance"
+					}
+				},
+				"constructor": {
+					"details": "Mint initial supply ke creator"
+				},
+				"transfer(address,uint256)": {
+					"details": "Transfer token ke address lain",
+					"params": {
+						"_to": "Recipient address",
+						"_value": "Jumlah token"
+					},
+					"returns": {
+						"success": "True jika berhasil"
+					}
+				}
+			},
+			"stateVariables": {
+				"balances": {
+					"details": "Mapping dari address ke balance Contoh: balances[0x123...] = 1000"
+				},
+				"totalSupply": {
+					"details": "Total supply token"
+				}
+			},
+			"title": "BasicToken",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/basicToken.sol": "BasicToken"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/basicToken.sol": {
+			"keccak256": "0x32fe7a5582c537dfca3356551ba8b9ccede0706c2057e4e21a1b545846376407",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cddbfd8a34976471954e444795d7b030f85dc2fabebfe9afa78472a94c73c73a",
+				"dweb:/ipfs/QmXeR92zEtwUt5ABezpsYWSi1i3wAYK2NXZGwq9TdGgWLu"
+			]
+		}
+	},
+	"version": 1
+}

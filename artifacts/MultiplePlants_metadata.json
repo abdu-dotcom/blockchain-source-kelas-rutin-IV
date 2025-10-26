@@ -143,7 +143,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"learn/MultiplePlants.sol": "MultiplePlants"
+			"Learn/Sesi-01/MultiplePlants.sol": "MultiplePlants"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -157,7 +157,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"learn/MultiplePlants.sol": {
+		"Learn/Sesi-01/MultiplePlants.sol": {
 			"keccak256": "0xcfaecf39f08d9a8412b97d520b579be1911913513d24d829088d7b624c64a98d",
 			"license": "MIT",
 			"urls": [
