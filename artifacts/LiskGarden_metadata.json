@@ -177,6 +177,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -452,11 +465,11 @@
 	},
 	"sources": {
 		"Learn/Sesi-01-Challenge/LiskGarden.sol": {
-			"keccak256": "0xe51a9a45cc884c017c263413981f52d6286aa575ed829949421598532c1b4a32",
+			"keccak256": "0x4dbf0ba406277be0f0dc44204404ae41e92fa0d02619f3007074a74605be79be",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0b17b37945e73208c25b07c9a4367741df2b8307874effe38ad0f4ead0f1fca0",
-				"dweb:/ipfs/QmSPs3pjyWQDWj9asiZGxBmwbSpK3xsouATua2PTLiqgBe"
+				"bzz-raw://b738e6d37586d1a1f4a7db8f87b3529eb17b105da988dd505d97f1abbde35959",
+				"dweb:/ipfs/QmTTTAQimvYgH7VFVGXc55FirYfSUN2cm6Y66zBPLLAhwM"
 			]
 		}
 	},

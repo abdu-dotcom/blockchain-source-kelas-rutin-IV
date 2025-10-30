@@ -58,7 +58,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"learn/LearnPayable.sol": "LearnPayable"
+			"Learn/Sesi-01/LearnPayable.sol": "LearnPayable"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -72,12 +72,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"learn/LearnPayable.sol": {
-			"keccak256": "0x331481994adae8c01d9f615e29f49b67e08b3af369af7e36d84ef3f0af0761ef",
+		"Learn/Sesi-01/LearnPayable.sol": {
+			"keccak256": "0xf6b4fc1cec08033bbee4c551d1840924a8e0fefb6da5dc7832bc8fb915ec8e67",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d8489667eeae32c488f91504becf27cbb8f3613c5d1005ab8a700f2cd7b8ce00",
-				"dweb:/ipfs/QmSyuB4niPiNJ22QJdmKd9T5MdMm81cV5z7QjZwhah386E"
+				"bzz-raw://26a43f65ee5c6f6260663d135019c3e4c80d9e41349772dda09e8cebeb82db0f",
+				"dweb:/ipfs/QmTxeJRsYPNB4RyPL2ub9bNmNm6PhqZVux45jKCCp5QY1Y"
 			]
 		}
 	},

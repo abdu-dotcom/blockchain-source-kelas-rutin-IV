@@ -33,8 +33,8 @@ contract LiskGarden {
     address public owner;
 
     // contanta -> value tetap.
-    uint256 public constant PLANT_PRICE = 0.001 ether; // biaya tanama tetap sebesar 0.001 ether
-    uint256 constant panen = 0.003 ether;   // Biaya tetap panen sebesar 0.003 ether
+    uint256 public constant PLANT_PRICE = 0.00001 ether; // biaya tanama tetap sebesar 0.001 ether
+    uint256 constant panen = 0.00003 ether;   // Biaya tetap panen sebesar 0.003 ether
     uint256 public constant STAGE_DURATION = 1 minutes; // waktu setiap pertumbuhan adalah 1 minutes;
     uint256 public constant WATER_DEPLETION_DURATION = 30 seconds; // lama waktu tanaman akan berkurang takaran airnya
     uint8 public constant WATER_DEPLETION_RATE = 2; // takaran air yang berkurang pada tanaman setiap 30 detik
@@ -51,10 +51,16 @@ contract LiskGarden {
         owner = msg.sender;
     }
 
+     // Cek saldo contract
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
     // fungsi untuk menanam tanaman baru.
+    // payable untuk mengirim uang ke address utama kontrak.
     function plantSeed() external payable returns (uint256){
         // 1: cek nominal yg user masukan harus lebih 0.001 eth
-        require(msg.value >= PLANT_PRICE, "Minium 0.001 ether");
+        require(msg.value >= PLANT_PRICE, "Minium 0.00001 ether");
         // 2: menghitung jumlah  tanaman yg sudah ditanam
         plantCounter += 1;
         // 3: menyiapkan informasi tanaman yg akan ditanaman
@@ -70,7 +76,9 @@ contract LiskGarden {
         });
         // 4: menyimpan tanaman yg sudah ditanam di array plants
         plants[plantCounter] = newPlant;
-        // 5: menampilkan log bahwa tanaman sudah ditanam
+        // 5. Push plantId ke userPlants
+        userPlants[msg.sender].push(newPlant.plantId);
+        // 6: menampilkan log bahwa tanaman sudah ditanam
         emit PlantSeeded(newPlant.owner, newPlant.plantId);
         // 6: mengembalikan plantId yang ditanaman
         return plantCounter;
@@ -78,27 +86,23 @@ contract LiskGarden {
 
     function calculateWaterLevel(uint256 _plantId) public view returns (uint256){
         // 1: ambil plant dari storage 
-        Plant storage myPlant = plants[ _plantId];
+        Plant memory myPlant = plants[ _plantId];
         // 2: Jika !exists atau isDead, return 0
         if (myPlant.isDead == true || myPlant.exists == false) {
             return 0;
         }   
-        // 3: Hitung lama waktu terakhir kali tanaman disiram
-        uint256 timeSinceIntervals = block.timestamp - myPlant.lastWatered;
-        
-        // 4: Hitung sudah berapa kali air tanaman seharusnya berkurang terakhir kali disiram//
-        uint256 depletionIntervals = timeSinceIntervals - WATER_DEPLETION_DURATION;
 
-        // 5: Hitung air yang telah hilang 
-        uint256 waterlost = depletionIntervals * WATER_DEPLETION_DURATION;
+        // waktu mundur? jangan kurangi
+        if (block.timestamp <= myPlant.lastWatered) return myPlant.waterLevel;
 
-        // 6: jika air yang hilang lebih besar dari tingkat air, berarti air sudah habis.
-        if (waterlost >= myPlant.waterLevel) {
-            return 0;
-        }
+        uint256 elapsed = block.timestamp - myPlant.lastWatered;             // ✅ urutan benar
+        if (elapsed < WATER_DEPLETION_DURATION) return myPlant.waterLevel;   // ✅ belum 1 interval
 
-        // 7: kembalikan sisa air yang ada.
-        return myPlant.waterLevel - waterlost;
+        uint256 intervals = elapsed / WATER_DEPLETION_DURATION;        // ✅ jangan minus
+        uint256 lost = intervals * WATER_DEPLETION_RATE;
+
+        // ✅ clamp agar tak underflow
+        return (myPlant.waterLevel > lost) ? (myPlant.waterLevel - lost) : 0;
     }
 
     function updateWaterLevel(uint256 _plantId) internal {
@@ -119,11 +123,11 @@ contract LiskGarden {
 
     function waterPlant(uint256 plantId) external {
         // check tanaman yang mau disiram
-        Plant memory myPlant = plants[plantId];
+        Plant storage myPlant = plants[plantId];
         // cek apakah tanaman ada
-        require(myPlant.exists == false,"tanaman tidak ditemukan");
+        require(myPlant.exists == true,"tanaman tidak ditemukan");
         // cek apakah tanaman sudah mati
-        require(myPlant.isDead == true, "Tanaman sudah mati");
+        require(myPlant.isDead == false, "Tanaman sudah mati");
         
         // set waterlevel = 100 dan jam tanaman disiram
         myPlant.waterLevel = 100;
@@ -137,9 +141,9 @@ contract LiskGarden {
 
     function updatePlantStage(uint256 plantId) public  {
         // check tanaman yang mau disiram
-        Plant memory myPlant = plants[plantId];
+        Plant storage myPlant = plants[plantId];
          // cek apakah tanaman ada
-        require(myPlant.exists == false,"tanaman tidak ditemukan");
+        require(myPlant.exists == true,"tanaman tidak ditemukan");
 
         // ubah tingkatan penyiraman tanaman
         updateWaterLevel(plantId);
@@ -153,7 +157,7 @@ contract LiskGarden {
         GrowStage newSatage = oldStage;
 
         // Hitung berapa lama tanaman terakhir ditanam
-        uint256 timeSincePlanted = myPlant.plantedDate - block.timestamp;
+        uint256 timeSincePlanted = block.timestamp - myPlant.plantedDate;
 
         // setiap satu menit tumbuhan bertumbuh
         // 60 detik awal itu proses ditanam
@@ -188,28 +192,36 @@ contract LiskGarden {
 
     function harvestPlant(uint256 plantId) external {
         // check tanaman yang mau dipanen
-        Plant memory myPlant = plants[plantId];
+        Plant storage myPlant = plants[plantId];
 
         // cek apakah tanaman ada
-        require(myPlant.exists == false,"tanaman tidak ditemukan");
+        require(myPlant.exists == true,"tanaman tidak ditemukan");
 
         // cek owner 
-        require(myPlant.owner != owner,"tanaman ini bukan milik kamu");
+        require(msg.sender == myPlant.owner,"tanaman ini bukan milik kamu");
 
         // cek tanaman sudah mati
-        require(myPlant.isDead == true,"tanaman sudah mati");
+        require(myPlant.isDead == false,"tanaman sudah mati");
 
         // Call updatePlantStage
         updatePlantStage(plantId);
 
         // kasih tau tanaman belum mekar
-        require(myPlant.stage != GrowStage.BLOOMING, "Tanaman belum mekar");
+        require(myPlant.stage == GrowStage.BLOOMING, "Tanaman belum mekar");
 
         // ubah status tanaman sudah tidak tersedia.
         myPlant.exists = false;
 
-        // Menerima uang karena berhasil menanam tanaman
-        
+        // 7. Emit PlantHarvested
+        emit PlantHarvested(plantId, msg.sender, panen);
+
+        // 8. Transfer reward
+        require(address(this).balance >= panen, "Saldo kontrak tidak cukup");
+        (bool success, ) = payable(msg.sender).call{value: panen}("");
+
+         // 9. require success
+        require(success, "Transfer reward gagal");
+
     }
 
     // ============================================
@@ -217,9 +229,13 @@ contract LiskGarden {
     // ============================================
 
     function getPlant(uint256 plantId) external view returns (Plant memory) {
-        Plant memory plant = plants[plantId];
-        plant.waterLevel = calculateWaterLevel(plantId);
-        return plant;
+        Plant memory myPlant = plants[plantId];
+        myPlant.waterLevel = calculateWaterLevel(plantId);
+
+        if (myPlant.waterLevel == 0) {
+            myPlant.isDead = true;
+        }
+        return myPlant;
     }
 
     function getUserPlants(address user) external view returns (uint256[] memory) {
@@ -228,7 +244,7 @@ contract LiskGarden {
 
     function withdraw() external {
         require(msg.sender == owner, "Bukan owner");
-        (bool success, ) = owner.call{value: 0.03 ether}("");
+        (bool success, ) = owner.call{value: 0.0003 ether}("");
         require(success, "Transfer gagal");
     }
 
